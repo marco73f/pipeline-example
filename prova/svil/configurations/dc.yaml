@@ -1,0 +1,66 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: null
+  generation: 2
+  labels:
+    app: prova
+  name: prova
+spec:
+  replicas: 1
+  selector:
+    deploymentconfig: prova
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: prova
+        deploymentconfig: prova
+    spec:
+      containers:
+      - image: 172.30.1.1:5000/clou0-svil/prova@sha256:15530cfcd233304fc3dca72349b421520fb95186e7f47fc81089c8558e86062d
+        imagePullPolicy: Always
+        name: prova
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - prova
+      from:
+        kind: ImageStreamTag
+        name: prova:latest
+        namespace: clou0-svil
+      lastTriggeredImage: 172.30.1.1:5000/clou0-svil/prova@sha256:15530cfcd233304fc3dca72349b421520fb95186e7f47fc81089c8558e86062d
+    type: ImageChange
+  - type: ConfigChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0

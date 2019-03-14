@@ -1,0 +1,25 @@
+apiVersion: v1
+items:
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftWebConsole
+      openshift.io/host.generated: "true"
+    creationTimestamp: null
+    labels:
+      app: prova
+    name: prova
+  spec:
+    host: prova-clou0-svil.192.168.42.105.nip.io
+    port:
+      targetPort: 8080-tcp
+    to:
+      kind: Service
+      name: prova
+      weight: 100
+    wildcardPolicy: None
+  status:
+    ingress: null
+kind: List
+metadata: {}

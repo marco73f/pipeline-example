@@ -1,0 +1,47 @@
+apiVersion: v1
+items:
+- apiVersion: build.openshift.io/v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftWebConsole
+    creationTimestamp: null
+    labels:
+      app: prova
+    name: prova
+  spec:
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: prova:latest
+    postCommit: {}
+    resources: {}
+    runPolicy: Serial
+    source:
+      git:
+        ref: master
+        uri: https://github.com/openshift/django-ex.git
+      type: Git
+    strategy:
+      sourceStrategy:
+        from:
+          kind: ImageStreamTag
+          name: python:3.6
+          namespace: openshift
+      type: Source
+    triggers:
+    - imageChange:
+        lastTriggeredImageID: 172.30.1.1:5000/openshift/python@sha256:59c3461b976886bb0663654d30b849c7aa4c3dc442eeba69e8c1da508207a901
+      type: ImageChange
+    - type: ConfigChange
+    - generic:
+        secret: 723ded361d376dba
+      type: Generic
+    - github:
+        secret: bc97aaa764bb4c29
+      type: GitHub
+  status:
+    lastVersion: 0
+kind: List
+metadata: {}
