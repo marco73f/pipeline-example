@@ -1,0 +1,19 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    setenv-sh: |
+      ENDPOINT_FVCM0=http://servizibe-fvcm0.syssede.systest.sanpaoloimi.com:7419
+      ENDPOINT_FVCP0_KEPROFILESERVICES=http://keprofileservices.fvcp0-svil.svc.cluster.local:8080
+      KEYCLOAK_AUTH_SERVER_URL=https://gwcb0-svil.syssede.systest.sanpaoloimi.com/auth/oauth/realms/ocp/protocol/openid-connect/certs
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: null
+    labels:
+      app: prova
+      app-type: jboss
+      cm-type: environment
+      template-version: 1.0.9
+    name: app-env-prova-v1
+kind: List
+metadata: {}
